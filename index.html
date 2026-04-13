@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV Analytics Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">Data Insights</p>
+        <h1>CSV Analytics Dashboard</h1>
+      </div>
+      <p id="active-source" class="active-source">Loaded: Students (example)</p>
+    </header>
+
+    <section class="controls-card" aria-label="Data source controls">
+      <label class="upload-button" for="csv-upload">
+        Upload CSV File
+        <input id="csv-upload" type="file" accept=".csv,text/csv" />
+      </label>
+
+      <span class="or-label">OR</span>
+
+      <label class="dropdown-wrap" for="dataset-select">
+        <span>Example Dataset</span>
+        <select id="dataset-select">
+          <option value="students">Students</option>
+          <option value="sales">Sales</option>
+          <option value="expenses">Expenses</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="stats-grid" aria-label="Summary stats">
+      <article class="stat-card">
+        <h2>Total Rows</h2>
+        <p id="total-rows">0</p>
+      </article>
+      <article class="stat-card">
+        <h2>Total Columns</h2>
+        <p id="total-columns">0</p>
+      </article>
+      <article class="stat-card">
+        <h2>Average Value</h2>
+        <p id="avg-value">N/A</p>
+      </article>
+      <article class="stat-card">
+        <h2>Max Value</h2>
+        <p id="max-value">N/A</p>
+      </article>
+    </section>
+
+    <section class="charts-grid" aria-label="Charts">
+      <article class="panel-card">
+        <div class="panel-head">
+          <h2>Bar Chart (Numeric Columns)</h2>
+          <p class="panel-subtitle">Average value per numeric column</p>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="bar-chart"></canvas>
+          <p id="bar-empty" class="chart-empty hidden">No numeric columns available for bar chart.</p>
+        </div>
+      </article>
+
+      <article class="panel-card">
+        <div class="panel-head panel-head-row">
+          <div>
+            <h2>Pie Chart</h2>
+            <p class="panel-subtitle">Distribution for selected column</p>
+          </div>
+          <label class="dropdown-wrap compact" for="pie-column-select">
+            <span>Column</span>
+            <select id="pie-column-select"></select>
+          </label>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="pie-chart"></canvas>
+          <p id="pie-empty" class="chart-empty hidden">No data available for selected column.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel-card table-panel" aria-label="CSV data table">
+      <div class="panel-head">
+        <h2>Data Table</h2>
+        <p class="panel-subtitle">Parsed CSV records</p>
+      </div>
+      <div class="table-wrap">
+        <table id="data-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
